@@ -1,0 +1,92 @@
+@import "tailwindcss";
+
+/*
+ * Aweleoma design tokens.
+ * One source of truth for colour, type, radius and elevation. Every component
+ * consumes these through Tailwind utilities (bg-ink, text-amber-ink, rounded-card…).
+ * Text/background pairs are documented on /design-system with their contrast ratios.
+ */
+@theme {
+  /* Core brand */
+  --color-ink: #0c2f30;          /* primary text + dark surfaces */
+  --color-ink-soft: #3d5a5b;     /* secondary text (6.7:1 on paper) */
+  --color-paper: #f6f3ec;        /* page background */
+  --color-card: #ffffff;
+  --color-line: #ddd6c8;         /* hairlines and borders */
+  --color-teal: #0f6b66;         /* primary action (6.3:1 on white) */
+  --color-teal-deep: #0a4f4b;
+  --color-amber: #f0a832;        /* highlight surface — use with ink text only */
+  --color-amber-ink: #8a5300;    /* amber for text (6.3:1 on white) */
+  --color-mist: #e7efec;
+
+  /* Vertical accents (surfaces paired with ink text) */
+  --color-linen: #e9e1d2;
+  --color-fleet: #d5e6f2;
+  --color-energy: #dcecc9;
+  --color-media: #f3d9d2;
+  --color-academy: #e4def3;
+  --color-parts: #f4e3c3;
+
+  /* Feedback */
+  --color-success: #1f7a3f;
+  --color-danger: #b42318;
+
+  /* Typography */
+  --font-display: var(--font-bricolage), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-instrument), ui-sans-serif, system-ui, sans-serif;
+
+  /* Shape + depth */
+  --radius-card: 1.25rem;
+  --radius-pill: 999px;
+  --shadow-soft: 0 1px 2px rgb(12 47 48 / 0.06), 0 8px 24px -12px rgb(12 47 48 / 0.18);
+  --shadow-lift: 0 2px 4px rgb(12 47 48 / 0.08), 0 24px 48px -20px rgb(12 47 48 / 0.35);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    @apply bg-paper text-ink font-sans antialiased;
+  }
+  h1, h2, h3, h4 {
+    @apply font-display tracking-tight;
+    text-wrap: balance;
+  }
+  p { text-wrap: pretty; }
+
+  /* WCAG 2.4.7 — always-visible keyboard focus */
+  :focus-visible {
+    outline: 3px solid var(--color-amber);
+    outline-offset: 2px;
+    border-radius: 6px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@layer components {
+  .container-x {
+    @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
+  }
+  .eyebrow {
+    @apply text-xs font-semibold uppercase tracking-[0.18em] text-teal;
+  }
+  .grain {
+    background-image: radial-gradient(rgb(12 47 48 / 0.07) 1px, transparent 1px);
+    background-size: 18px 18px;
+  }
+}
+
+@keyframes rise {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: none; }
+}
+.animate-rise { animation: rise 0.6s cubic-bezier(0.2, 0.7, 0.2, 1) both; }
