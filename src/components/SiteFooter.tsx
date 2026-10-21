@@ -23,7 +23,7 @@ export function SiteFooter() {
               WhatsApp:{' '}
               <a
                 className="underline decoration-amber underline-offset-4 hover:text-amber"
-                href="https://wa.me/234712001614135"
+                href="https://wa.me/2347120014135"
                 target="_blank"
                 rel="noopener noreferrer"
               >
